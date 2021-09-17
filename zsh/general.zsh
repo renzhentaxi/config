@@ -7,6 +7,8 @@ source $XDG_CONFIG_HOME/zsh/nvm.zsh
 
 #simple prompt
 source $XDG_CONFIG_HOME/zsh/pure.zsh
+#aws
+source $XDG_CONFIG_HOME/zsh/aws.zsh
 #theme = snazzy
 
 #highlghts stuff in zsh shell
