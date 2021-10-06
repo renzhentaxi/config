@@ -1,3 +1,14 @@
-nvim/pack
-nvim/plugin
+#ignore everything
+*
 
+#track nvim
+!nvim
+!nvim/**
+
+#track zsh configs
+!zsh
+!zsh/**
+
+#track notes
+!notes
+!notes/**
