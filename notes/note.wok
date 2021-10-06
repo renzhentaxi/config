@@ -1,2 +1,12 @@
 terminal theme:
 	snazzy: https://github.com/sindresorhus/terminal-snazzy
+nvim:
+	install packer:
+		mkdir nvim/pack/packer/start/
+		cd 
+		git clone --depth 1 https://github.com/wbthomason/packer.nvim 
+
+
+todo: 
+	script:
+		install theme
