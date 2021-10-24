@@ -4,6 +4,7 @@
 #nvim: track 
 !nvim
 !nvim/**
+
 #nvim: still ignore pack and plugins
 nvim/pack
 nvim/plugin
@@ -15,3 +16,7 @@ nvim/plugin
 #notes: track
 !notes
 !notes/**
+
+#scripts
+!scripts
+!scripts/**
