@@ -1,3 +1,22 @@
+#ignore everything
+*
+
+#nvim: track 
+!nvim
+!nvim/**
+
+#nvim: still ignore pack and plugins
 nvim/pack
 nvim/plugin
 
+#zsh: track configs
+!zsh
+!zsh/**
+
+#notes: track
+!notes
+!notes/**
+
+#scripts
+!scripts
+!scripts/**
