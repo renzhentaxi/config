@@ -6,4 +6,9 @@ return require('packer').startup(function()
 	use 'neoclide/vim-jsx-improve'
 	use 'ggandor/lightspeed.nvim'
 	use 'folke/which-key.nvim'
+	use 'nvim-telescope/telescope.nvim'
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
+	}
 end)
