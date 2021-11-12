@@ -3,14 +3,17 @@ alias vi=nvim
 export XDG_CONFIG_HOME=~/.config
 export EDITOR='nvim'
 
+zshDir=$XDG_CONFIG_HOME/zsh
+
 source $XDG_CONFIG_HOME/zsh/nvm.zsh
 
 #simple prompt
 source $XDG_CONFIG_HOME/zsh/pure.zsh
 #aws
 source $XDG_CONFIG_HOME/zsh/aws.zsh
-#theme = snazzy
+source $zshDir/git.zsh 
 
+#theme = snazzy
 #highlghts stuff in zsh shell
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
