@@ -1,3 +1,9 @@
+stripName()
+{
+    name=taxi/
+    echo ${1#$name}
+}
+
 is_git_repo()
 {
     git -C $1 rev-parse 2>/dev/null
@@ -12,11 +18,12 @@ git_worktree_checkout()
     fi
 
     worktreeDir=../$1
-    rest=($*[2,-1])
+    rest=($*[2,-2])
+    branchName=$*[-1]
 
     cd $(git worktree list | head -n 1 | cut -d " " -f1)
     git pull
-
+     
     git worktree add $worktreeDir $rest
 
     sourceNodeModule=$(realpath node_modules)
