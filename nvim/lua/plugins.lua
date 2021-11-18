@@ -72,4 +72,6 @@ require("packer").startup(function()
 		config = nulllsConfig,
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	})
+
+	use("tpope/vim-fugitive")
 end)
