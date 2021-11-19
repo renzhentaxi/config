@@ -16,6 +16,10 @@ git_main_branch()
     echo $(basename $(git rev-parse --abbrev-ref origin/HEAD))
 }
 
+git_current_branch()
+{
+    echo $(git rev-parse --abbrev-ref HEAD)
+}
 
 git_worktree_checkout()
 {
@@ -41,8 +45,16 @@ git_worktree_checkout()
     return
 }
 
-alias gwtc=git_worktree_checkout
+git_worktree_switch()
+{
+    cd `git worktree list | fzf | cut -d " " -f 1`
+}
 
+alias gwtc=git_worktree_checkout
+alias gwts=git_worktree_switch
+
+alias gpuo='git push -u origin $(git_current_branch)'
+alias gprc='gh pr create --title $(git_current_branch)'
 alias gprd='git diff --name-only $(git_main_branch)...'
 
 alias reload="source ~/.config/zsh/git.zsh"
