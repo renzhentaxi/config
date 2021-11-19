@@ -27,6 +27,9 @@ local nulllsConfig = function()
 		sources = {
 			require("null-ls").builtins.formatting.prettierd,
 			require("null-ls").builtins.formatting.stylua,
+			require("null-ls").builtins.formatting.shfmt.with({
+				filetypes = { "sh", "bash" },
+			}),
 		},
 	})
 
@@ -57,14 +60,6 @@ require("packer").startup(function()
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = treeSitterConfig,
-	})
-
-	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("nvim-tree").setup({})
-		end,
 	})
 
 	use({
