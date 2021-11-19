@@ -1,9 +1,11 @@
-vim.o.background = 'dark'
-vim.g.tokyonight_style = 'night'
-vim.cmd[[colorscheme tokyonight]]
+vim.opt.background = "dark"
+vim.g.tokyonight_style = "night"
+vim.cmd([[colorscheme tokyonight]])
+
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- set copy paste
-vim.opt.clipboard:append {'unnamedplus'}
+vim.opt.clipboard:append({ "unnamedplus" })
 
 -- show line number
 vim.opt.number = true

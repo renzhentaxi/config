@@ -45,11 +45,23 @@ end
 require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
-	use("hrsh7th/nvim-compe")
 	use("neoclide/vim-jsx-improve")
 	use("ggandor/lightspeed.nvim")
 	use("folke/tokyonight.nvim")
 	use("folke/which-key.nvim")
+
+	use({
+		"hrsh7th/nvim-cmp",
+		config = require("plugin_configs.nvim_cmp").init,
+	})
+
+	use({
+		"hrsh7th/cmp-buffer",
+	})
+
+	use({
+		"hrsh7th/cmp-nvim-lsp",
+	})
 
 	use({
 		"nvim-telescope/telescope.nvim",
