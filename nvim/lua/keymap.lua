@@ -33,10 +33,14 @@ function telescope_keys.map(mapping, options)
 
 		keybind = prefix .. keybind
 		if action.cmd ~= nil then
-			action.cmd = "<cmd>lua require('telescope.builtin')." .. action.cmd .. "()<cr>"
+			action.cmd = telescope_keys.action(action.cmd)
 		end
 		map_key(mode, keybind, action.cmd, action.name)
 	end
+end
+
+function telescope_keys.action(action_name)
+	return "<cmd>lua require('telescope.builtin')." .. action_name .. "()<cr>"
 end
 
 telescope_keys.map({
@@ -45,10 +49,7 @@ telescope_keys.map({
 	lb = "buffers",
 	lx = "marks",
 
-	["/"] = "current_buffer_fuzzy_find",
-
 	c = "commands",
-	f = "find_files",
 	s = "live_grep",
 	h = "help_tags",
 
@@ -70,6 +71,8 @@ telescope_keys.map({
 	li = "lsp_document_diagnostics",
 	lI = "lsp_workspace_diagnostics",
 })
+
+telescope_keys.map({ p = "find_files", ["/"] = "current_buffer_fuzzy_find" }, { prefix = "<leader>" })
 
 -- nvim tree
 map_key("n", "<C-n>", ":NvimTreeToggle<CR>")
