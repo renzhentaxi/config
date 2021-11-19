@@ -1,38 +1,75 @@
-function map_key(mode, lhs, rhs, options) 
-	if options == nil then
-		options = {}
+local wk = require("which-key")
+
+function map_key(mode, lhs, rhs, name)
+	if rhs ~= nil then
+		wk.register({
+			[lhs] = { rhs, name },
+		}, { mode = mode })
+		vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true })
+	else
+		wk.register({
+			[lhs] = { name = name },
+		})
 	end
-	if options.noremap  == nil then 
-		options.noremap = true
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
-vim.g.mapleader = ' '
+
+vim.g.mapleader = " "
 
 -- terminal
-map_key('t', '<leader><Esc>', '<C-\\><C-n>')
+map_key("t", "<leader><Esc>", "<C-\\><C-n>")
 
 -- telescope
-function telescope_map_key(mode, lhs, rhs, options)
-    map_key(mode, '<leader>' .. lhs, "<cmd>lua require('telescope.builtin')." .. rhs .. '()<cr>', options)
+local telescope_keys = {}
+
+function telescope_keys.map(mapping, options)
+	options = options or {}
+	local mode = options.mode or "n"
+	local prefix = options.prefix or "<leader>f"
+
+	for keybind, action in pairs(mapping) do
+		if type(action) == "string" then
+			action = { name = action, cmd = action }
+		end
+
+		keybind = prefix .. keybind
+		if action.cmd ~= nil then
+			action.cmd = "<cmd>lua require('telescope.builtin')." .. action.cmd .. "()<cr>"
+		end
+		map_key(mode, keybind, action.cmd, action.name)
+	end
 end
-telescope_map_key('n', 'f/', 'builtin')
-telescope_map_key('n', 'ff', "find_files") 
-telescope_map_key('n', 'fl', 'file_browser')
 
-telescope_map_key('n', 'fs', "live_grep")
-telescope_map_key('n', 'flb', "buffers")
-telescope_map_key('n', 'flm', 'marks')
+telescope_keys.map({
+	["?"] = "builtin",
 
-telescope_map_key('n', 'fg', 'git_branches')
+	lb = "buffers",
+	lx = "marks",
 
-telescope_map_key('n', 'fls', 'lsp_document_symbols')
-telescope_map_key('n', 'flS', 'lsp_workspace_symbols')
-telescope_map_key('n', 'flr', 'lsp_references')
+	["/"] = "current_buffer_fuzzy_find",
 
-telescope_map_key('n', 'fd', 'lsp_document_diagnostics')
-telescope_map_key('n', 'fD', 'lsp_workspace_diagnostics')
+	c = "commands",
+	f = "find_files",
+	s = "live_grep",
+	h = "help_tags",
 
+	g = { name = "git" },
+	gb = "git_branches",
+	gc = "git_commits",
+	gs = "git_status",
+	l = { name = "lsp" },
+
+	ls = "lsp_document_symbols",
+	lS = "lsp_workspace_symbols",
+
+	lr = "lsp_references",
+	ld = "lsp_definitions",
+	lD = "ls_implementations",
+	lt = "lsp_type_definitions",
+
+	la = "lsp_code_actions",
+	li = "lsp_document_diagnostics",
+	lI = "lsp_workspace_diagnostics",
+})
 
 -- nvim tree
-map_key('n', '<C-n>', ':NvimTreeToggle<CR>')
+map_key("n", "<C-n>", ":NvimTreeToggle<CR>")
