@@ -58,6 +58,12 @@ ensureInstalledSingle() {
 			echo todo
 		fi
 		;;
+    gopls)
+        ensureInstalled go 
+        if isNotInstalled gopls; then
+            go install golang.org/x/tools/gopls@latest 
+        fi
+        ;;
 	shfmt)
 		ensureInstalled go
 		if isNotInstalled shfmt; then
@@ -91,6 +97,9 @@ ensureInstalled() {
 
 # lua
 ensureInstalled stylua lua-language-server
+
+# go
+ensureInstalled gopls
 
 # bash formatter
 ensureInstalled shfmt

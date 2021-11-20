@@ -12,5 +12,10 @@ local typescript = {
 	end,
 }
 
+local golang = {
+	capabilities = capabilities,
+	flags = { debounce_text_changes = 150 },
+}
 nvim_lsp.tsserver.setup(typescript)
+nvim_lsp.gopls.setup(golang)
 nvim_lsp.eslint.setup({})
