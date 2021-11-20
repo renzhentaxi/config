@@ -48,7 +48,7 @@ require("packer").startup(function()
 	use("neoclide/vim-jsx-improve")
 	use("ggandor/lightspeed.nvim")
 	use("folke/tokyonight.nvim")
-	use("folke/which-key.nvim")
+	--	use("folke/which-key.nvim")
 
 	use({
 		"hrsh7th/nvim-cmp",

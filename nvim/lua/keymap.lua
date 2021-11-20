@@ -1,15 +1,15 @@
-local wk = require("which-key")
+--local wk = require("which-key")
 
 function map_key(mode, lhs, rhs, name)
 	if rhs ~= nil then
-		wk.register({
-			[lhs] = { rhs, name },
-		}, { mode = mode })
+		-- wk.register({
+		-- 	[lhs] = { rhs, name },
+		-- }, { mode = mode })
 		vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true })
 	else
-		wk.register({
-			[lhs] = { name = name },
-		})
+		-- wk.register({
+		-- 	[lhs] = { name = name },
+		-- })
 	end
 end
 
