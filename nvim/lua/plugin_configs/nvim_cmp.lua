@@ -2,6 +2,20 @@ local M = {}
 
 function M.init()
 	local cmp = require("cmp")
+	local function tab_complete_next(fallback)
+		if cmp.visible() then
+			cmp.select_next_item()
+		else
+			fallback()
+		end
+	end
+	local function tab_complete_previous(fallback)
+		if cmp.visible() then
+			cmp.select_prev_item()
+		else
+			fallback()
+		end
+	end
 
 	cmp.setup({
 		snippet = {
@@ -9,21 +23,14 @@ function M.init()
 			expand = function(args) end,
 		},
 		mapping = {
-			["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-			["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-			["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-			["<C-e>"] = cmp.mapping({
-				i = cmp.mapping.abort(),
-				c = cmp.mapping.close(),
-			}),
-			["<CR>"] = cmp.mapping.confirm({ select = true }),
-			["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s", "c" }),
+			["<Tab>"] = cmp.mapping(tab_complete_next, { "i" }),
+			["<S-Tab>"] = cmp.mapping(tab_complete_previous, { "i" }),
 		},
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
 			{ name = "buffer" },
 		}),
+		preselect = cmp.PreselectMode.None,
 	})
 end
 
