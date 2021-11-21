@@ -1,22 +1,29 @@
---local wk = require("which-key")
+function as_action(action)
+	if type(action) == "string" then
+		return { name = action, cmd = action }
+	end
+	return action
+end
 
-function map_key(mode, lhs, rhs, name)
-	if rhs ~= nil then
-		-- wk.register({
-		-- 	[lhs] = { rhs, name },
-		-- }, { mode = mode })
-		vim.api.nvim_set_keymap(mode, lhs, rhs, { noremap = true })
-	else
-		-- wk.register({
-		-- 	[lhs] = { name = name },
-		-- })
+function map_key(mode, keybind, action)
+	action = as_action(action)
+	if action and action.cmd then
+		vim.api.nvim_set_keymap(mode, keybind, action.cmd, { noremap = true })
 	end
 end
 
 vim.g.mapleader = " "
 
 -- terminal
-map_key("t", "<leader><Esc>", "<C-\\><C-n>")
+local cmd_escape_terminal = "<C-\\><C-n>"
+map_key("t", "<leader><Esc>", cmd_escape_terminal)
+
+for _, key in ipairs({ "h", "j", "k", "l" }) do
+	local keybind = "<A-" .. key .. ">"
+	local action_cmd = "<C-w>" .. key
+	map_key("t", keybind, cmd_escape_terminal .. action_cmd)
+	map_key("n", keybind, action_cmd)
+end
 
 -- telescope
 local telescope_keys = {}
@@ -27,15 +34,14 @@ function telescope_keys.map(mapping, options)
 	local prefix = options.prefix or "<leader>f"
 
 	for keybind, action in pairs(mapping) do
-		if type(action) == "string" then
-			action = { name = action, cmd = action }
-		end
+		action = as_action(action)
 
 		keybind = prefix .. keybind
 		if action.cmd ~= nil then
 			action.cmd = telescope_keys.action(action.cmd)
 		end
-		map_key(mode, keybind, action.cmd, action.name)
+
+		map_key(mode, keybind, action)
 	end
 end
 
