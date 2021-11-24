@@ -19,8 +19,9 @@ function M.init()
 
 	cmp.setup({
 		snippet = {
-			-- REQUIRED - you must specify a snippet engine
-			expand = function(args) end,
+			expand = function(args)
+				require("luasnip").lsp_expand(args.body)
+			end,
 		},
 		mapping = {
 			["<Tab>"] = cmp.mapping(tab_complete_next, { "i" }),
@@ -28,6 +29,7 @@ function M.init()
 		},
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp" },
+			{ name = "luasnip" },
 			{ name = "buffer" },
 		}),
 		preselect = cmp.PreselectMode.None,
