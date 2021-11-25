@@ -21,7 +21,7 @@ local cmd_escape_terminal = "<C-\\><C-n>"
 map_key("t", "<leader><Esc>", cmd_escape_terminal)
 
 for _, key in ipairs({ "h", "j", "k", "l" }) do
-	local keybind = "<A-" .. key .. ">"
+	local keybind = "<" .. "A" .. "-" .. key .. ">"
 	local action_cmd = "<C-w>" .. key
 	map_key("t", keybind, cmd_escape_terminal .. action_cmd)
 	map_key("n", keybind, action_cmd)
@@ -62,28 +62,26 @@ telescope_keys.map({
 	s = "live_grep",
 	h = "help_tags",
 
-	g = { name = "git" },
 	gb = "git_branches",
 	gc = "git_commits",
 	gs = "git_status",
-	l = { name = "lsp" },
 
 	ls = "lsp_document_symbols",
 	lS = "lsp_workspace_symbols",
 
-	lr = "lsp_references",
-	ld = "lsp_definitions",
 	lD = "ls_implementations",
 	lt = "lsp_type_definitions",
 
-	la = "lsp_code_actions",
 	li = "lsp_document_diagnostics",
 	lI = "lsp_workspace_diagnostics",
 })
 
-telescope_keys.map({ p = "find_files", ["/"] = "current_buffer_fuzzy_find" }, { prefix = "<leader>" })
-
--- nvim tree
-map_key("n", "<C-n>", ":NvimTreeToggle<CR>")
+telescope_keys.map({
+	p = "find_files",
+	["/"] = "current_buffer_fuzzy_find",
+	gd = "lsp_definitions",
+	gr = "lsp_references",
+	a = "lsp_code_actions",
+}, { prefix = "<leader>" })
 
 return M

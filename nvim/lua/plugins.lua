@@ -45,22 +45,14 @@ end
 require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
-	use("neoclide/vim-jsx-improve")
 	use("ggandor/lightspeed.nvim")
 	use("folke/tokyonight.nvim")
-	--	use("folke/which-key.nvim")
+	use("L3MON4D3/LuaSnip")
 
 	use({
 		"hrsh7th/nvim-cmp",
 		config = require("plugin_configs.nvim_cmp").init,
-	})
-
-	use({
-		"hrsh7th/cmp-buffer",
-	})
-
-	use({
-		"hrsh7th/cmp-nvim-lsp",
+		requires = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	})
 
 	use({
