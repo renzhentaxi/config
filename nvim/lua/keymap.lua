@@ -14,29 +14,11 @@ end
 
 vim.g.mapleader = " "
 
+map_key("n", "<leader>w", '<cmd>lua require("my_plugins.window_mode").window_mode()<CR>')
+
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
 map_key("t", "<leader><Esc>", cmd_escape_terminal)
-
-local M = {}
-function M.window_mode()
-	local keys = { "h", "j", "k", "l" }
-	local shouldStop = false
-	while shouldStop == false do
-		local c = vim.fn.getchar()
-		if type(c) == "number" then
-			c = vim.fn.nr2char(c)
-		end
-		if vim.tbl_contains(keys, c) then
-			vim.api.nvim_command("wincmd " .. c)
-			vim.cmd("redraw")
-		else
-			shouldStop = true
-		end
-	end
-end
-
-map_key("n", "<C-w>", '<cmd>lua require("keymap").window_mode()<CR>')
 
 for _, key in ipairs({ "h", "j", "k", "l" }) do
 	local keybind = "<A-" .. key .. ">"
@@ -45,6 +27,7 @@ for _, key in ipairs({ "h", "j", "k", "l" }) do
 	map_key("n", keybind, action_cmd)
 end
 
+map_key("n", "<leader>r", '<cmd>lua require("my_plugins.window_mode").reload()<CR>')
 -- telescope
 local telescope_keys = {}
 
