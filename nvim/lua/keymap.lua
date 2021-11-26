@@ -1,3 +1,5 @@
+local keymap = require("my_plugins.keymap")
+
 function as_action(action)
 	if type(action) == "string" then
 		return { name = action, cmd = action }
@@ -14,20 +16,21 @@ end
 
 vim.g.mapleader = " "
 
-map_key("n", "<leader>w", '<cmd>lua require("my_plugins.window_mode").window_mode()<CR>')
+keymap.map_lua_function("n <leader>w", "my_plugins.window_mode", "window_mode")
+keymap.map_lua_function("n <leader>r", "my_plugins.utils", "reload")
 
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
-map_key("t", "<leader><Esc>", cmd_escape_terminal)
+
+keymap.map("t <leader><Esc>", cmd_escape_terminal)
 
 for _, key in ipairs({ "h", "j", "k", "l" }) do
 	local keybind = "<" .. "A" .. "-" .. key .. ">"
 	local action_cmd = "<C-w>" .. key
-	map_key("t", keybind, cmd_escape_terminal .. action_cmd)
-	map_key("n", keybind, action_cmd)
+	keymap.map("t " .. keybind, cmd_escape_terminal .. action_cmd)
+	keymap.map("n " .. keybind, action_cmd)
 end
 
-map_key("n", "<leader>r", '<cmd>lua require("my_plugins.window_mode").reload()<CR>')
 -- telescope
 local telescope_keys = {}
 
@@ -40,11 +43,7 @@ function telescope_keys.map(mapping, options)
 		action = as_action(action)
 
 		keybind = prefix .. keybind
-		if action.cmd ~= nil then
-			action.cmd = telescope_keys.action(action.cmd)
-		end
-
-		map_key(mode, keybind, action)
+		keymap.map_lua_function(mode .. " " .. keybind, "telescope.builtin", action.cmd)
 	end
 end
 

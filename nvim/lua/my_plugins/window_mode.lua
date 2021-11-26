@@ -22,13 +22,4 @@ function M.window_mode()
 	util.set_highlight_background("Normal", current_background)
 end
 
-function M.reload()
-	for key, value in pairs(package.loaded) do
-		if vim.startswith(key, "my_plugins") then
-			package.loaded[key] = nil
-		end
-	end
-	package.loaded["my_plugins.window_mode"] = nil
-end
-
 return M
