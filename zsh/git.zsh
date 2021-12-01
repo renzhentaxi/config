@@ -47,7 +47,14 @@ git_worktree_checkout()
 
 git_worktree_switch()
 {
-    cd `git worktree list | fzf | cut -d " " -f 1`
+    if ! is_git_repo .; then
+        echo 'not in a git repo!'
+        return 1
+    fi
+    directory=`git worktree list | fzf | cut -d " " -f 1` 
+    if [ -n "${directory}" ] ; then;
+        cd $directory && git pull
+    fi
 }
 
 alias gwtc=git_worktree_checkout
