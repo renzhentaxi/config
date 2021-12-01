@@ -61,8 +61,8 @@ alias gwtc=git_worktree_checkout
 alias gwts=git_worktree_switch
 
 alias gpuo='git push -u origin $(git_current_branch)'
+alias grho='git reset --hard origin/$(git_current_branch)'
 alias gprc='gh pr create --title $(git_current_branch)'
 alias gprd='git diff --name-only $(git_main_branch)...'
-
 alias reload="source ~/.config/zsh/git.zsh"
 alias edit="nvim ~/.config/zsh/git.zsh"
