@@ -1,10 +1,17 @@
 local M = {}
 
+function M.callIfExist(tbl_name, function_name)
+	if tbl_name[function_name] ~= nil then
+		tbl_name[function_name]()
+	end
+end
+
 function M.reload()
 	for key, value in pairs(package.loaded) do
 		if vim.startswith(key, "my_plugins") then
+			M.callIfExist(require(key), "teardown")
 			package.loaded[key] = nil
-			require(key)
+			M.callIfExist(require(key), "setup")
 			print("reloaded " .. key)
 		end
 	end

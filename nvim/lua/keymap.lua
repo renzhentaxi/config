@@ -1,23 +1,12 @@
 local keymap = require("my_plugins.keymap")
 
-function as_action(action)
-	if type(action) == "string" then
-		return { name = action, cmd = action }
-	end
-	return action
-end
-
-function map_key(mode, keybind, action)
-	action = as_action(action)
-	if action and action.cmd then
-		vim.api.nvim_set_keymap(mode, keybind, action.cmd, { noremap = true })
-	end
-end
-
 vim.g.mapleader = " "
 
-keymap.map_lua_function("n <leader>w", "my_plugins.window_mode", "window_mode")
+keymap.map_lua_function("n|t <leader><Esc>", "my_plugins.window_mode", "window_mode")
+keymap.map_lua_function("n|t <leader>w", "my_plugins.window_mode", "window_mode")
 keymap.map_lua_function("n <leader>r", "my_plugins.utils", "reload")
+
+keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
@@ -40,10 +29,8 @@ function telescope_keys.map(mapping, options)
 	local prefix = options.prefix or "<leader>f"
 
 	for keybind, action in pairs(mapping) do
-		action = as_action(action)
-
 		keybind = prefix .. keybind
-		keymap.map_lua_function(mode .. " " .. keybind, "telescope.builtin", action.cmd)
+		keymap.map_lua_function(mode .. " " .. keybind, "telescope.builtin", action)
 	end
 end
 
