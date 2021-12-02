@@ -7,7 +7,6 @@ keymap.map_lua_function("n|t <leader>w", "my_plugins.window_mode", "window_mode"
 keymap.map_lua_function("n <leader>r", "my_plugins.utils", "reload")
 
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
-
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
 

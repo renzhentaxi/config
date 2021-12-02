@@ -1,8 +1,12 @@
 local M = {}
 
-function M.callIfExist(tbl_name, function_name)
-	if tbl_name[function_name] ~= nil then
-		tbl_name[function_name]()
+function M.callIfExist(tbl, function_name)
+	if type(tbl) ~= "table" then
+		return
+	end
+
+	if tbl[function_name] ~= nil then
+		tbl[function_name]()
 	end
 end
 
