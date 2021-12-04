@@ -10,8 +10,6 @@ keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
 
-keymap.map("t <leader><Esc>", cmd_escape_terminal)
-
 for _, key in ipairs({ "h", "j", "k", "l" }) do
 	local keybind = "<" .. "A" .. "-" .. key .. ">"
 	local action_cmd = "<C-w>" .. key
