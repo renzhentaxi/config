@@ -1,12 +1,3 @@
-local function treeSitterConfig()
-	require("nvim-treesitter.configs").setup({
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-			use_languagetree = true,
-		},
-	})
-end
 
 -- bootstrap
 local fn = vim.fn
@@ -51,7 +42,7 @@ require("packer").startup(function()
 
 	use({
 		"hrsh7th/nvim-cmp",
-		config = require("plugin_configs.nvim_cmp").init,
+		config = require("plugin_configs.nvim_cmp").setup,
 		requires = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	})
 
@@ -63,7 +54,7 @@ require("packer").startup(function()
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
-		config = treeSitterConfig,
+		config = require("plugin_configs.treesitter").setup,
 	})
 
 	use({

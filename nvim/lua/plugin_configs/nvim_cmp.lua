@@ -1,6 +1,6 @@
 local M = {}
 
-function M.init()
+function M.setup()
 	local cmp = require("cmp")
 	local function tab_complete_next(fallback)
 		if cmp.visible() then
