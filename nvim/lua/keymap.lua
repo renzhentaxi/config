@@ -2,9 +2,19 @@ local keymap = require("my_plugins.keymap")
 
 vim.g.mapleader = " "
 
-keymap.map_lua_function("n|t <leader><Esc>", "my_plugins.window_mode", "window_mode")
-keymap.map_lua_function("n|t <leader>w", "my_plugins.window_mode", "window_mode")
-keymap.map_lua_function("n <leader>r", "my_plugins.utils", "reload")
+-- window_mode
+keymap.map_action({ "n", "t" }, "<leader><Esc>", "window_mode.enter")
+keymap.map_action({ "n" }, "<leader>w", "window_mode.enter")
+
+-- utility
+keymap.map(
+	"n <leader>r",
+	keymap.lua({
+		name = "utils.reload_plugins",
+		module_name = "my_plugins.utils",
+		function_name = "reload",
+	})
+)
 
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 -- terminal
@@ -27,12 +37,13 @@ function telescope_keys.map(mapping, options)
 
 	for keybind, action in pairs(mapping) do
 		keybind = prefix .. keybind
-		keymap.map_lua_function(mode .. " " .. keybind, "telescope.builtin", action)
+		keymap.lua({
+			name = "telescope." .. action,
+			module_name = "telescope.builtin",
+			function_name = action,
+		})
+		keymap.map_action("n", keybind, "telescope." .. action)
 	end
-end
-
-function telescope_keys.action(action_name)
-	return "<cmd>lua require('telescope.builtin')." .. action_name .. "()<cr>"
 end
 
 telescope_keys.map({

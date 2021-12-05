@@ -1,3 +1,5 @@
+-- my plugins
+require("my_plugins.window_mode").setup()
 
 -- bootstrap
 local fn = vim.fn
