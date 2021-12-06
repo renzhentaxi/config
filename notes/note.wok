@@ -14,3 +14,14 @@ todo:
 		install ansible on debian
 		install theme
 
+todo:
+    nvim:
+        status line
+        surround
+        snippet
+        tab management
+        session
+        file of interest
+        diff
+        merge
+        text object
