@@ -33,16 +33,33 @@ function M.asList(data)
 end
 -- the rgb value given by nvim_get_hl_by_name is in the form of R + G * 256 + B * 256 * 256.
 function M.to_hex(rgb_number)
-	return "#" .. bit.tohex(rgb_number, 6)
+    if type(rgb_number) == "number" then
+    	return "#" .. bit.tohex(rgb_number, 6)
+    end
+    return rgb_number
 end
 
-function M.get_highlight_background(name)
+function M.get_highlight(name)
 	local highlight = vim.api.nvim_get_hl_by_name(name, true)
-	return M.to_hex(highlight.background)
+        
+    return {
+            foreground = M.to_hex(highlight.foreground),
+            background = M.to_hex(highlight.background)
+        }
 end
 
-function M.set_highlight_background(name, background)
-	vim.cmd("highlight " .. name .. " guibg=" .. background)
+function M.set_highlight(name, highlight)
+    local settings = {}
+
+    if highlight.background then
+        settings[#settings+1] = "guibg=" .. highlight.background
+    end
+    if highlight.foreground then
+        settings[#settings+1] = "guifg=" .. highlight.foreground
+    end
+    if #settings > 0 then
+        vim.cmd("highlight " ..name ..  " " .. table.concat(settings, " "))
+    end
 end
 
 function M.string_to_char_table(str)
