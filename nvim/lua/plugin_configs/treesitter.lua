@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-	print("hilo")
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = { "bash", "rust", "go", "lua", "python", "scss", "typescript" },
 		highlight = {
@@ -13,13 +12,13 @@ function M.setup()
 			enable = true,
 			keymaps = {
 				-- normal
-				init_selection = "gnn",
+				init_selection = "<Enter>",
 				-- visual
-				node_incremental = "grn",
+				node_incremental = "<Enter>",
 				-- visual
-				scope_incremental = "grc",
+				scope_incremental = "<TAB>",
 				-- visual
-				node_decremental = "grm",
+				node_decremental = "<S-TAB>",
 			},
 		},
 	})
