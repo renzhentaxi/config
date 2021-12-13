@@ -15,26 +15,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	})
 end
 
-local nulllsConfig = function()
-	require("null-ls").config({
-		sources = {
-			require("null-ls").builtins.formatting.prettierd,
-			require("null-ls").builtins.formatting.stylua,
-			require("null-ls").builtins.formatting.shfmt.with({
-				filetypes = { "sh", "bash" },
-			}),
-		},
-	})
-
-	require("lspconfig")["null-ls"].setup({
-		on_attach = function(client)
-			if client.resolved_capabilities.document_formatting then
-				vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-			end
-		end,
-	})
-end
-
 require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
@@ -61,7 +41,7 @@ require("packer").startup(function()
 
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
-		config = nulllsConfig,
+		config = require("plugin_configs.nullls").setup,
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	})
 
