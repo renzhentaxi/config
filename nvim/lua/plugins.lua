@@ -19,7 +19,7 @@ require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
 	use("ggandor/lightspeed.nvim")
-	use("folke/tokyonight.nvim")
+
 	use("L3MON4D3/LuaSnip")
 
 	use({
@@ -46,4 +46,8 @@ require("packer").startup(function()
 	})
 
 	use("tpope/vim-fugitive")
+
+	-- themes
+	use("folke/tokyonight.nvim")
+	use("rebelot/kanagawa.nvim")
 end)
