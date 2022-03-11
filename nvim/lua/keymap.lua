@@ -26,6 +26,10 @@ for _, key in ipairs({ "h", "j", "k", "l" }) do
 	keymap.map("t " .. keybind, cmd_escape_terminal .. action_cmd)
 	keymap.map("n " .. keybind, action_cmd)
 end
+-- fugitive
+keymap.map("n <leader>gg", keymap.action({ name = "git status", command = ":G<cr>" }))
+
+keymap.map("n <leader>gb", keymap.action({ name = "git blame", command = ":G blame<cr>" }))
 
 -- telescope
 local telescope_keys = {}
