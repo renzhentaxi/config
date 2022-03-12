@@ -7,9 +7,13 @@ local default_opts = {
 
 local actions = {}
 
--- name
--- command
+-- name: the name for this action
+-- desc: description for this action
+-- command: either a string or a lua function that will be executed
+-- tags: a list of tags
+-- unknown properties will be an error
 function M.action(args)
+	utils.check_for_unknown_fields(args, { "name", "desc", "command", "tags" }, "keymap.action")
 	actions[args.name] = args
 	return args
 end
