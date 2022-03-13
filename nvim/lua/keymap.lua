@@ -1,10 +1,9 @@
-local keymap = require("my_plugins.keymap")
-
-local window_mode = require("my_plugins.window_mode")
-
 vim.g.mapleader = " "
 
+local keymap = require("my_plugins.keymap")
+
 -- window_mode
+local window_mode = require("my_plugins.window_mode")
 keymap.map({ "n|t <leader><ESC>", "n <leader>w" }, window_mode.actions.enter)
 
 -- utility
@@ -31,7 +30,21 @@ end
 
 -- fugitive
 keymap.map("n <leader>gs", keymap.action({ name = "git status", command = ":G<cr>", tags = "fugitive" }))
+keymap.map("n <leader>gc", keymap.action({ name = "git commit", command = ":G commit<cr>", tags = "fugitive" }))
 keymap.map("n <leader>gb", keymap.action({ name = "git blame", command = ":G blame<cr>", tags = "fugitive" }))
+keymap.map(
+	"n <leader>gpn",
+	keymap.action({ name = "git push no-verify", command = ":G push --no-verify<cr>", tags = "fugitive" })
+)
+keymap.map(
+	"n <leader>gpf",
+	keymap.action({
+		name = "git push no-verify force-with-lease",
+		command = ":G push --no-verify --force-with-lease<cr>",
+		tags = "fugitive",
+	})
+)
+keymap.map("n <leader>gpp", keymap.action({ name = "git push", command = ":G push<cr>", tags = "fugitive" }))
 
 -- telescope
 local telescope_keys = {}
