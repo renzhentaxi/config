@@ -1,10 +1,11 @@
 local keymap = require("my_plugins.keymap")
 
+local window_mode = require("my_plugins.window_mode")
+
 vim.g.mapleader = " "
 
 -- window_mode
-keymap.map_action({ "n", "t" }, "<leader><Esc>", "window_mode.enter")
-keymap.map_action({ "n" }, "<leader>w", "window_mode.enter")
+keymap.map({ "n|t <leader><ESC>", "n <leader>w" }, window_mode.actions.enter)
 
 -- utility
 keymap.map(
@@ -17,6 +18,7 @@ keymap.map(
 )
 
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
+
 -- terminal
 local cmd_escape_terminal = "<C-\\><C-n>"
 
@@ -26,10 +28,10 @@ for _, key in ipairs({ "h", "j", "k", "l" }) do
 	keymap.map("t " .. keybind, cmd_escape_terminal .. action_cmd)
 	keymap.map("n " .. keybind, action_cmd)
 end
--- fugitive
-keymap.map("n <leader>gg", keymap.action({ name = "git status", command = ":G<cr>" }))
 
-keymap.map("n <leader>gb", keymap.action({ name = "git blame", command = ":G blame<cr>" }))
+-- fugitive
+keymap.map("n <leader>gs", keymap.action({ name = "git status", command = ":G<cr>", tags = "fugitive" }))
+keymap.map("n <leader>gb", keymap.action({ name = "git blame", command = ":G blame<cr>", tags = "fugitive" }))
 
 -- telescope
 local telescope_keys = {}

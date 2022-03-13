@@ -1,5 +1,7 @@
 local M = {}
 
+M.str = require("my_plugins.utils.str")
+
 function M.callIfExist(tbl, function_name)
 	if type(tbl) ~= "table" then
 		return
@@ -21,16 +23,6 @@ function M.reload()
 	end
 end
 
-function M.asList(data)
-	local data_type = type(data)
-	if data_type == "string" then
-		return { data }
-	elseif data_type == "table" then
-		return data
-	end
-	print("asList not a valid value: " .. data)
-	return {}
-end
 -- the rgb value given by nvim_get_hl_by_name is in the form of R + G * 256 + B * 256 * 256.
 function M.to_hex(rgb_number)
 	if type(rgb_number) == "number" then
