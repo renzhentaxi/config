@@ -21,6 +21,13 @@ git_current_branch()
     echo $(git rev-parse --abbrev-ref HEAD)
 }
 
+has_remote_branch()
+{
+    hasRemote=$(git ls-remote --heads origin $1)
+    test ! -z $hasRemote
+    return $?
+}
+
 git_worktree_checkout()
 {
     if ! is_git_repo .; then
@@ -53,13 +60,13 @@ git_worktree_switch()
     fi
     directory=`git worktree list | fzf | cut -d " " -f 1` 
     if [ -n "${directory}" ] ; then;
-        cd $directory && git pull
+        cd $directory && has_remote_branch $(git_current_branch) && git pull
     fi
 }
 
 alias gwtc=git_worktree_checkout
 alias gwts=git_worktree_switch
-
+alias gwtr="git worktree list | cut -f1 -w | fzf -m | xargs -n1 git worktree remove --force"
 alias gpuo='git push -u origin $(git_current_branch)'
 alias grho='git reset --hard origin/$(git_current_branch)'
 alias gprc='gh pr create --title $(git_current_branch)'
