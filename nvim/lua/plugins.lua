@@ -50,5 +50,4 @@ require("packer").startup(function()
 	-- themes
 	use("folke/tokyonight.nvim")
 	use("rebelot/kanagawa.nvim")
-	use("cpea2506/one_monokai.nvim")
 end)
