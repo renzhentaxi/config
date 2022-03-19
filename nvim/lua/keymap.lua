@@ -40,9 +40,8 @@ local fugitive = require("plugin_configs.fugitive")
 keymap.map("n <leader>gs", fugitive.actions.status)
 keymap.map("n <leader>gc", fugitive.actions.commit)
 keymap.map("n <leader>gb", fugitive.actions.blame)
-keymap.map("n <leader>gpn", fugitive.actions.push_no_verify)
-keymap.map("n <leader>gpf", fugitive.actions.push_force_no_verify)
-keymap.map("n <leader>gpp", fugitive.actions.push)
+keymap.map("n <leader>gp", fugitive.actions.push)
+keymap.map("n <leader>gpp", fugitive.actions.push_force)
 
 -- lsp
 --
