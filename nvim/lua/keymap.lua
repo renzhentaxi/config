@@ -7,15 +7,21 @@ local window_mode = require("my_plugins.window_mode")
 keymap.map({ "n|t <leader><ESC>", "n <leader>w" }, window_mode.actions.enter)
 
 -- utility
-keymap.map(
-	"n <leader>r",
-	keymap.lua({
-		name = "utils.reload_plugins",
-		module_name = "my_plugins.utils",
-		function_name = "reload",
-	})
-)
+local utils = require("my_plugins.utils")
 
+local function reload_my_plugins()
+	for key, value in pairs(package.loaded) do
+		if vim.startswith(key, "my_plugins") then
+			utils.callIfExist(require(key), "teardown")
+			package.loaded[key] = nil
+			utils.callIfExist(require(key), "setup")
+			print("reloaded " .. key)
+		end
+	end
+end
+
+keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
+-- remap
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 
 -- terminal
@@ -46,6 +52,8 @@ keymap.map(
 )
 keymap.map("n <leader>gpp", keymap.action({ name = "git push", command = ":G push<cr>", tags = "fugitive" }))
 
+-- lsp
+--
 -- telescope
 local telescope_keys = {}
 

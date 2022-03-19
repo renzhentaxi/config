@@ -1,6 +1,7 @@
 local M = {}
 
 M.str = require("my_plugins.utils.str")
+M.logger = require("my_plugins.utils.logger")
 
 function M.callIfExist(tbl, function_name)
 	if type(tbl) ~= "table" then
@@ -9,17 +10,6 @@ function M.callIfExist(tbl, function_name)
 
 	if tbl[function_name] ~= nil then
 		tbl[function_name]()
-	end
-end
-
-function M.reload()
-	for key, value in pairs(package.loaded) do
-		if vim.startswith(key, "my_plugins") then
-			M.callIfExist(require(key), "teardown")
-			package.loaded[key] = nil
-			M.callIfExist(require(key), "setup")
-			print("reloaded " .. key)
-		end
 	end
 end
 
@@ -62,13 +52,6 @@ function M.string_to_char_table(str)
 	return char_table
 end
 
-function M.split_once(str, delim)
-	local delim_index = string.find(str, delim)
-	local before = string.sub(str, 0, delim_index - 1)
-	local after = string.sub(str, delim_index + 1)
-	return before, after
-end
-
 function M.get_char()
 	local c = vim.fn.getchar()
 
@@ -79,21 +62,11 @@ function M.get_char()
 	return c
 end
 
-function log_warn(error_message, context, stack_level)
-	stack_level = stack_level or 0
-	local stack = debug.getinfo(stack_level + 1)
-	vim.api.nvim_echo({
-		{ "[" .. context .. "] ", "Label" },
-		{ error_message .. "\n", "WarningMsg" },
-		{ "\tAt " .. stack.source .. " " .. stack.currentline .. "\n" },
-	}, true, {})
-end
-
 -- throws error if object contains a field not in the allowed list
 function M.check_for_unknown_fields(object, allowed_list, context)
 	for k in pairs(object) do
 		if not vim.tbl_contains(allowed_list, k) then
-			log_warn("warn: unexpected key " .. k, context, 3)
+			M.logger.warn("warn: unexpected key " .. k, context, 3)
 		end
 	end
 end

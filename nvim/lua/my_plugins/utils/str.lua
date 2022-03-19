@@ -19,4 +19,11 @@ function M.as_list(str_or_list)
 	return {}
 end
 
+function M.split_once(str, delim)
+	local delim_index = string.find(str, delim)
+	local before = string.sub(str, 0, delim_index - 1)
+	local after = string.sub(str, delim_index + 1)
+	return before, after
+end
+
 return M

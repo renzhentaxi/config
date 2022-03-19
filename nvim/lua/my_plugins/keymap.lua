@@ -59,7 +59,7 @@ function M.map_action(modes, keybind, action_name)
 end
 
 local function map_single(keybind_with_mode, action, opts)
-	modes, keybind = utils.split_once(keybind_with_mode, " ")
+	modes, keybind = utils.str.split_once(keybind_with_mode, " ")
 	modes = vim.split(modes, "|")
 	vim.keymap.set(modes, keybind, action.command or action, opts or {})
 end
