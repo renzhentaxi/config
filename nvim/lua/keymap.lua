@@ -35,22 +35,14 @@ for _, key in ipairs({ "h", "j", "k", "l" }) do
 end
 
 -- fugitive
-keymap.map("n <leader>gs", keymap.action({ name = "git status", command = ":G<cr>", tags = "fugitive" }))
-keymap.map("n <leader>gc", keymap.action({ name = "git commit", command = ":G commit<cr>", tags = "fugitive" }))
-keymap.map("n <leader>gb", keymap.action({ name = "git blame", command = ":G blame<cr>", tags = "fugitive" }))
-keymap.map(
-	"n <leader>gpn",
-	keymap.action({ name = "git push no-verify", command = ":G push --no-verify<cr>", tags = "fugitive" })
-)
-keymap.map(
-	"n <leader>gpf",
-	keymap.action({
-		name = "git push no-verify force-with-lease",
-		command = ":G push --no-verify --force-with-lease<cr>",
-		tags = "fugitive",
-	})
-)
-keymap.map("n <leader>gpp", keymap.action({ name = "git push", command = ":G push<cr>", tags = "fugitive" }))
+local fugitive = require("plugin_configs.fugitive")
+
+keymap.map("n <leader>gs", fugitive.actions.status)
+keymap.map("n <leader>gc", fugitive.actions.commit)
+keymap.map("n <leader>gb", fugitive.actions.blame)
+keymap.map("n <leader>gpn", fugitive.actions.push_no_verify)
+keymap.map("n <leader>gpf", fugitive.actions.push_force_no_verify)
+keymap.map("n <leader>gpp", fugitive.actions.push)
 
 -- lsp
 --
