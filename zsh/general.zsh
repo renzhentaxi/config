@@ -1,21 +1,31 @@
+#nvim
 alias vi=nvim
-
-export XDG_CONFIG_HOME=~/.config
 export EDITOR='nvim'
-zshDir=$XDG_CONFIG_HOME/zsh
+export VISUAL='nvim'
 
+#general
+export XDG_CONFIG_HOME=~/.config
+
+zshDir=$XDG_CONFIG_HOME/zsh #todo: is this actually being used?
+
+#nvm
 source $XDG_CONFIG_HOME/zsh/nvm.zsh
 
 #simple prompt
 source $XDG_CONFIG_HOME/zsh/pure.zsh
+
 #aws
 source $XDG_CONFIG_HOME/zsh/aws.zsh
+
+#git
 source $zshDir/git.zsh
 
 #theme = snazzy
+
 #highlghts stuff in zsh shell
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#vim like keybind
 bindkey -v
 
 export PATH="$HOME/go/bin:$PATH"

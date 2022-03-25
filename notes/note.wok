@@ -1,27 +1,32 @@
 terminal theme:
 	snazzy: https://github.com/sindresorhus/terminal-snazzy
+
 nvim:
 	install packer:
 		mkdir nvim/pack/packer/start/
 		cd 
 		git clone --depth 1 https://github.com/wbthomason/packer.nvim 
 
+
 windows subsystem:
 	debian: you will need to upgrade to buster first if you want python 3.10
-todo: 
-	script:
-		install pyenv on debian
-		install ansible on debian
-		install theme
 
-todo:
-    nvim:
-        status line
-        surround
-        snippet
-        tab management
-        session
-        file of interest
-        diff
-        merge
-        text object
+todo.script: 
+    lua
+    javascript/typescript lsp
+    yarn, npm, node
+    python
+    tmux
+    nvim
+    config
+
+todo.nvim:
+    status line
+    surround
+    snippet
+    tab management
+    session
+    file of interest
+    diff
+    merge
+    text object
