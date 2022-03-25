@@ -41,7 +41,8 @@ keymap.map("n <leader>gs", fugitive.actions.status)
 keymap.map("n <leader>gc", fugitive.actions.commit)
 keymap.map("n <leader>gb", fugitive.actions.blame)
 keymap.map("n <leader>gp", fugitive.actions.push)
-keymap.map("n <leader>gpp", fugitive.actions.push_force)
+keymap.map("n <leader>gpP", fugitive.actions.push_force)
+keymap.map("n <leader>gpp", fugitive.actions.push_no_verify)
 
 -- lsp
 --

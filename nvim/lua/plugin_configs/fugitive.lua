@@ -7,6 +7,12 @@ M.actions.commit = keymap.action({ name = "git commit", command = ":G commit<cr>
 M.actions.blame = keymap.action({ name = "git blame", command = ":G blame<cr>", tags = "fugitive" })
 M.actions.push = keymap.action({ name = "git push", command = ":G push ", tags = "fugitive" })
 
+M.actions.push_no_verify = keymap.action({
+	name = "git push no-verify",
+	command = ":G push --no-verify ",
+	tags = "fugitive",
+})
+
 M.actions.push_force = keymap.action({
 	name = "git push no-verify force",
 	command = ":G push --no-verify --force-with-lease",
