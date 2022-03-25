@@ -20,3 +20,5 @@ nvim/plugin
 #scripts
 !scripts
 !scripts/**
+
+scripts/build_cache/*
