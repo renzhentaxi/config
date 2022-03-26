@@ -12,6 +12,7 @@ fi
 if [ -d $directory ]; then
 	cd $directory
 
+	echo "check-git: fetching git"
 	# fetch current branch
 	git fetch -q origin $(git branch --show-current)
 
@@ -20,13 +21,19 @@ if [ -d $directory ]; then
 
 	# compare hash
 	if [ $localHash = $remoteHash ]; then
+
+		echo "$0: no updates"
 		exit 1
 	else
+		echo "$0: has updates"
 		git pull -q
+		echo "$0: finish updating"
 		exit 0
 	fi
 
 else
+	echo "$0: started cloning"
 	git clone --depth 1 --branch $branch $url $directory
+	echo "$0: finished cloning"
 	exit 0
 fi
