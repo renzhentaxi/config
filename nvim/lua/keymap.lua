@@ -94,7 +94,16 @@ telescope_keys.map({
 	["/"] = "current_buffer_fuzzy_find",
 	gd = "lsp_definitions",
 	gr = "lsp_references",
-	a = "lsp_code_actions",
 }, { prefix = "<leader>" })
+
+-- trouble
+
+keymap.map(
+	"n <leader>ga",
+	keymap.action({
+		name = "trouble diagnostics",
+		command = ":TroubleToggle<CR>",
+	})
+)
 
 return M

@@ -46,7 +46,13 @@ require("packer").startup(function()
 	})
 
 	use("tpope/vim-fugitive")
-
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({})
+		end,
+	})
 	-- themes
 	use("folke/tokyonight.nvim")
 	use("rebelot/kanagawa.nvim")

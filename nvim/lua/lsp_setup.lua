@@ -17,4 +17,17 @@ local golang = {
 nvim_lsp.gopls.setup(golang)
 
 nvim_lsp.eslint.setup({})
-nvim_lsp.rust_analyzer.setup({})
+
+local rust = {
+	checkOnSave = {
+		overrideCommand = {
+			"cargo",
+			"clippy",
+			"--workspace",
+			"--message-format=json",
+			"--all-targets",
+			"--all-features",
+		},
+	},
+}
+nvim_lsp.rust_analyzer.setup(rust)
