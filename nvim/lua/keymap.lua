@@ -20,7 +20,7 @@ local function reload_my_plugins()
 	end
 end
 
-keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
+-- keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
 -- remap
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 
@@ -45,7 +45,7 @@ keymap.map("n <leader>gpP", fugitive.actions.push_force)
 keymap.map("n <leader>gpp", fugitive.actions.push_no_verify)
 
 -- lsp
---
+keymap.map("n <leader>r", keymap.action({ name = "rename", command = vim.lsp.buf.rename }))
 -- telescope
 local telescope_keys = {}
 
