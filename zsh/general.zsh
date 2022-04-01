@@ -5,17 +5,18 @@ export VISUAL='nvim'
 
 #general
 export XDG_CONFIG_HOME=~/.config
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 zshDir=$XDG_CONFIG_HOME/zsh #todo: is this actually being used?
 
 #nvm
-source $XDG_CONFIG_HOME/zsh/nvm.zsh
+source $zshDir/nvm.zsh
 
 #simple prompt
-source $XDG_CONFIG_HOME/zsh/pure.zsh
+source $zshDir/pure.zsh
 
 #aws
-source $XDG_CONFIG_HOME/zsh/aws.zsh
+source $zshDir/aws.zsh
 
 #git
 source $zshDir/git.zsh
