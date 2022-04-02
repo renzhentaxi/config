@@ -27,6 +27,7 @@ if [ -d $directory ]; then
 	else
 		echo "$0: has updates"
 		git pull -q
+		git submodule update --init --recursive
 		echo "$0: finish updating"
 		exit 0
 	fi
@@ -34,6 +35,8 @@ if [ -d $directory ]; then
 else
 	echo "$0: started cloning"
 	git clone --depth 1 --branch $branch $url $directory
+	cd $directory
+	git submodule update --init --recursive
 	echo "$0: finished cloning"
 	exit 0
 fi
