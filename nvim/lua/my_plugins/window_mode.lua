@@ -29,14 +29,7 @@ function M.enter()
 	util.set_highlight(before, current_background)
 end
 
-function M.setup()
-	local keymap = require("my_plugins.keymap")
-	keymap.lua({
-		name = "window_mode.enter",
-		module_name = "my_plugins.window_mode",
-		function_name = "enter",
-	})
-end
+function M.setup() end
 
 -- actions
 local keymap = require("my_plugins.keymap")
