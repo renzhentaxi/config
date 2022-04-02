@@ -15,7 +15,10 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	})
 end
 
-require("packer").startup(function()
+local packer = require("packer")
+local use = packer.use
+
+packer.startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
 	use("ggandor/lightspeed.nvim")
@@ -53,6 +56,8 @@ require("packer").startup(function()
 			require("trouble").setup({})
 		end,
 	})
+
+	use({ "nvim-lualine/lualine.nvim", config = require("plugin_configs.lualine").setup })
 	-- themes
 	use("folke/tokyonight.nvim")
 	use("rebelot/kanagawa.nvim")
