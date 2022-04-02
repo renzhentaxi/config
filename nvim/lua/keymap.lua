@@ -50,55 +50,29 @@ keymap.map("n <leader>gpp", fugitive.actions.push_no_verify)
 
 -- lsp
 keymap.map("n <leader>r", keymap.action({ name = "rename", command = vim.lsp.buf.rename }))
+
 -- telescope
-local telescope_keys = {}
 
-function telescope_keys.map(mapping, options)
-	options = options or {}
-	local mode = options.mode or "n"
-	local prefix = options.prefix or "<leader>f"
+local telescope = require("plugin_configs.telescope")
 
-	for keybind, action in pairs(mapping) do
-		keybind = prefix .. keybind
-		keymap.lua({
-			name = "telescope." .. action,
-			module_name = "telescope.builtin",
-			function_name = action,
-		})
-		keymap.map_action("n", keybind, "telescope." .. action)
-	end
-end
+keymap.map("n <leader>ld", telescope.actions.diagnostics)
+keymap.map("n <leader>la", telescope.actions.lsp_code_actions)
+keymap.map("n <leader>ls", telescope.actions.lsp_document_symbols)
+keymap.map("n <leader>lS", telescope.actions.lsp_workspace_symbols)
 
-telescope_keys.map({
-	["?"] = "builtin",
+keymap.map("n <leader>lx", telescope.actions.marks)
+keymap.map("n <leader>lb", telescope.actions.buffers)
+keymap.map("n <leader>lr", telescope.actions.registers)
 
-	lb = "buffers",
-	lx = "marks",
+keymap.map("n <leader>p", telescope.actions.find_files)
+keymap.map("n <leader>P", telescope.actions.live_grep)
 
-	c = "commands",
-	s = "live_grep",
-	h = "help_tags",
+keymap.map("n <leader>gd", telescope.actions.lsp_definitions)
+keymap.map("n <leader>gi", telescope.actions.lsp_implementations)
+keymap.map("n <leader>gr", telescope.actions.lsp_references)
+keymap.map("n <leader>gt", telescope.actions.lsp_type_definitions)
 
-	gb = "git_branches",
-	gc = "git_commits",
-	gs = "git_status",
-
-	ls = "lsp_document_symbols",
-	lS = "lsp_workspace_symbols",
-
-	lD = "ls_implementations",
-	lt = "lsp_type_definitions",
-
-	li = "lsp_document_diagnostics",
-	lI = "lsp_workspace_diagnostics",
-})
-
-telescope_keys.map({
-	p = "find_files",
-	["/"] = "current_buffer_fuzzy_find",
-	gd = "lsp_definitions",
-	gr = "lsp_references",
-}, { prefix = "<leader>" })
+keymap.map("n <leader>/", telescope.actions.current_buffer_fuzzy_find)
 
 -- trouble
 
