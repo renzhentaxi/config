@@ -10,7 +10,7 @@ keymap.map({ "n|t <leader><ESC>", "n <leader>w" }, window_mode.actions.enter)
 local utils = require("my_plugins.utils")
 
 local function reload_my_plugins()
-	for key, value in pairs(package.loaded) do
+	for key, _ in pairs(package.loaded) do
 		if vim.startswith(key, "my_plugins") then
 			utils.callIfExist(require(key), "teardown")
 			package.loaded[key] = nil
@@ -19,12 +19,12 @@ local function reload_my_plugins()
 		end
 	end
 end
--- quickfix
+-- keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
 
+-- quickfix
 keymap.map("n ]q", keymap.action({ name = "quickfix next", command = ":cn<CR>" }))
 keymap.map("n [q", keymap.action({ name = "quickfix prev", command = ":cp<CR>" }))
 
--- keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
 -- remap
 keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 
@@ -73,7 +73,7 @@ keymap.map("n <leader>gr", telescope.actions.lsp_references)
 keymap.map("n <leader>gt", telescope.actions.lsp_type_definitions)
 
 keymap.map("n <leader>/", telescope.actions.current_buffer_fuzzy_find)
-
+keymap.map("n <leader>f", telescope.actions.file_browser)
 -- trouble
 
 keymap.map(

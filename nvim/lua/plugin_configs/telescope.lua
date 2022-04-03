@@ -1,11 +1,13 @@
-local telescope = require("telescope.builtin")
+local telescope = require("telescope.")
+local builtins = require("telescope.builtin")
+
 local keymap = require("my_plugins.keymap")
 local m = {}
 
 m.actions = {}
 
 local function create_telescope_action(builtin_name)
-	return keymap.action({ name = "telescope." .. builtin_name, command = telescope[builtin_name] })
+	return keymap.action({ name = "telescope." .. builtin_name, command = builtins[builtin_name] })
 end
 
 m.actions.diagnostics = create_telescope_action("diagnostics")
@@ -60,10 +62,15 @@ m.actions.colorscheme = create_telescope_action("colorscheme")
 m.actions.marks = create_telescope_action("marks")
 
 -- check for new pickers
-for name, _ in pairs(telescope) do
+for name, _ in pairs(builtins) do
 	if m.actions[name] == nil then
 		print("new plugin:", name)
 	end
 end
+
+m.actions.file_browser = keymap.action({
+	name = "telescope.file_browser",
+	command = telescope.extensions.file_browser.file_browser,
+})
 
 return m

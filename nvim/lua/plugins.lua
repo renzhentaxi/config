@@ -37,6 +37,14 @@ packer.startup(function()
 	})
 
 	use({
+		"nvim-telescope/telescope-file-browser.nvim",
+		requires = "nvim-telescope/telescope.nvim",
+		config = function()
+			require("telescope").load_extension("file_browser")
+		end,
+	})
+
+	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = require("plugin_configs.treesitter").setup,
