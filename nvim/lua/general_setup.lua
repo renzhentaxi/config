@@ -1,6 +1,4 @@
-vim.opt.background = "dark"
-vim.g.tokyonight_style = "night"
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme kanagawa]])
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
