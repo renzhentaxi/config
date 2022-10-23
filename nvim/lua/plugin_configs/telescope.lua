@@ -52,17 +52,20 @@ m.actions.fd = create_telescope_action("fd")
 m.actions.git_commits = create_telescope_action("git_commits")
 m.actions.help_tags = create_telescope_action("help_tags")
 m.actions.quickfix = create_telescope_action("quickfix")
+m.actions.quickfixhistory = create_telescope_action("quickfixhistory")
 m.actions.command_history = create_telescope_action("command_history")
 m.actions.keymaps = create_telescope_action("keymaps")
 m.actions.builtin = create_telescope_action("builtin")
 m.actions.current_buffer_fuzzy_find = create_telescope_action("current_buffer_fuzzy_find")
 m.actions.colorscheme = create_telescope_action("colorscheme")
 m.actions.marks = create_telescope_action("marks")
+m.actions.lsp_incoming_calls=create_telescope_action("lsp_incoming_calls")
+m.actions.lsp_outgoing_calls=create_telescope_action("lsp_outgoing_calls")
 
 -- check for new pickers
 for name, _ in pairs(builtins) do
 	if m.actions[name] == nil then
-		print("new plugin:", name)
+		print("plugin_config.telescope: new builtin pickers detected", name)
 	end
 end
 
