@@ -18,10 +18,17 @@ end
 local packer = require("packer")
 local use = packer.use
 
+-- setup
 packer.startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
-	use("ggandor/lightspeed.nvim")
+	use({
+        "ggandor/leap.nvim",
+        config = function()
+            require("leap").add_default_mappings()
+        end
+    }
+    )
 
 	use("L3MON4D3/LuaSnip")
 
