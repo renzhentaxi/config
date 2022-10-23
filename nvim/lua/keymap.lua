@@ -56,7 +56,7 @@ keymap.map("n <leader>r", keymap.action({ name = "rename", command = vim.lsp.buf
 local telescope = require("plugin_configs.telescope")
 
 keymap.map("n <leader>ld", telescope.actions.diagnostics)
-keymap.map("n <leader>la", telescope.actions.lsp_code_actions)
+-- keymap.map("n <leader>la", telescope.actions.lsp_code_actions) use vim.lsp.buf.code_action
 keymap.map("n <leader>ls", telescope.actions.lsp_document_symbols)
 keymap.map("n <leader>lS", telescope.actions.lsp_workspace_symbols)
 
