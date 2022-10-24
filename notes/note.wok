@@ -27,6 +27,14 @@ todo.nvim:
     tab management
     session
     file of interest
-    diff
-    merge
     text object
+    git/github
+        pr review
+            write comments
+        diff
+        view changed files
+        seach changed files
+        checkout/create branches
+        search branches
+
+    keybind for editing configs

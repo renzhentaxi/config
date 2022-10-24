@@ -21,7 +21,8 @@ local use = packer.use
 packer.startup(function()
 	use("wbthomason/packer.nvim")
 	use("neovim/nvim-lspconfig")
-	use({
+	
+    use({
         "ggandor/leap.nvim",
         config = function()
             require("leap").add_default_mappings()
