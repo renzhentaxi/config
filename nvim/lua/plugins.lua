@@ -48,7 +48,7 @@ packer.startup(function()
 		requires = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope").load_extension("file_browser")
-		end,
+        end,
 	})
 
 	use({
@@ -76,4 +76,17 @@ packer.startup(function()
 	-- themes
 	use("folke/tokyonight.nvim")
 	use("rebelot/kanagawa.nvim")
+    use({"anuvyklack/hydra.nvim", config = function()    
+        local Hydra = require('hydra')
+        Hydra({
+            name = "Window",
+            body = "<leader>w",
+            heads = {
+                {"h", "<C-w>h"},
+                {"j","<C-w>j "},
+                {"k","<C-w>k "},
+                {"l","<C-w>l "},
+            }
+        })
+    end})
 end)

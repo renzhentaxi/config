@@ -2,9 +2,6 @@ vim.g.mapleader = " "
 
 local keymap = require("my_plugins.keymap")
 
--- window_mode
-local window_mode = require("my_plugins.window_mode")
-keymap.map({ "n|t <leader><ESC>", "n <leader>w" }, window_mode.actions.enter)
 
 -- utility
 local utils = require("my_plugins.utils")
