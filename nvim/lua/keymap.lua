@@ -16,7 +16,6 @@ local function reload_my_plugins()
 		end
 	end
 end
--- keymap.map("n <leader>r", keymap.action({ name = "reload my_plugins", command = reload_my_plugins }))
 
 -- quickfix
 keymap.map("n ]q", keymap.action({ name = "quickfix next", command = ":cn<CR>" }))

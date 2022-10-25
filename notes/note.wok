@@ -38,3 +38,6 @@ todo.nvim:
         search branches
 
     keybind for editing configs
+
+todo.lazygit:
+    add config for force push without hooks
