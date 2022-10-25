@@ -20,7 +20,8 @@ local use = packer.use
 -- setup
 packer.startup(function()
 	use("wbthomason/packer.nvim")
-	use("neovim/nvim-lspconfig")
+	use({"neovim/nvim-lspconfig", config = require("plugin_configs.lspconfig").setup})
+
 	
     use({
         "ggandor/leap.nvim",
@@ -89,4 +90,9 @@ packer.startup(function()
             }
         })
     end})
+    use({"williamboman/mason.nvim", config = require("plugin_configs.mason").setup})
+    use({"williamboman/mason-lspconfig.nvim",config = function() 
+        require("mason-lspconfig").setup({automatic_installation=true})
+            
+        end})
 end)
