@@ -28,6 +28,7 @@ todo.nvim:
     session
     file of interest
     text object
+    replace window plugin with hydra
     git/github
         pr review
             write comments

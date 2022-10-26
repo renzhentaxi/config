@@ -59,8 +59,8 @@ m.actions.builtin = create_telescope_action("builtin")
 m.actions.current_buffer_fuzzy_find = create_telescope_action("current_buffer_fuzzy_find")
 m.actions.colorscheme = create_telescope_action("colorscheme")
 m.actions.marks = create_telescope_action("marks")
-m.actions.lsp_incoming_calls=create_telescope_action("lsp_incoming_calls")
-m.actions.lsp_outgoing_calls=create_telescope_action("lsp_outgoing_calls")
+m.actions.lsp_incoming_calls = create_telescope_action("lsp_incoming_calls")
+m.actions.lsp_outgoing_calls = create_telescope_action("lsp_outgoing_calls")
 
 -- check for new pickers
 for name, _ in pairs(builtins) do

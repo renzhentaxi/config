@@ -4,7 +4,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap = fn.system({
+	fn.system({
 		"git",
 		"clone",
 		"--depth",
@@ -20,16 +20,14 @@ local use = packer.use
 -- setup
 packer.startup(function()
 	use("wbthomason/packer.nvim")
-	use({"neovim/nvim-lspconfig", config = require("plugin_configs.lspconfig").setup})
+	use({ "neovim/nvim-lspconfig", config = require("plugin_configs.lspconfig").setup })
 
-	
-    use({
-        "ggandor/leap.nvim",
-        config = function()
-            require("leap").add_default_mappings()
-        end
-    }
-    )
+	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	})
 
 	use("L3MON4D3/LuaSnip")
 
@@ -49,7 +47,7 @@ packer.startup(function()
 		requires = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope").load_extension("file_browser")
-        end,
+		end,
 	})
 
 	use({
@@ -77,22 +75,27 @@ packer.startup(function()
 	-- themes
 	use("folke/tokyonight.nvim")
 	use("rebelot/kanagawa.nvim")
-    use({"anuvyklack/hydra.nvim", config = function()    
-        local Hydra = require('hydra')
-        Hydra({
-            name = "Window",
-            body = "<leader>w",
-            heads = {
-                {"h", "<C-w>h"},
-                {"j","<C-w>j "},
-                {"k","<C-w>k "},
-                {"l","<C-w>l "},
-            }
-        })
-    end})
-    use({"williamboman/mason.nvim", config = require("plugin_configs.mason").setup})
-    use({"williamboman/mason-lspconfig.nvim",config = function() 
-        require("mason-lspconfig").setup({automatic_installation=true})
-            
-        end})
+	use({
+		"anuvyklack/hydra.nvim",
+		config = function()
+			local Hydra = require("hydra")
+			Hydra({
+				name = "Window",
+				body = "<leader>w",
+				heads = {
+					{ "h", "<C-w>h" },
+					{ "j", "<C-w>j " },
+					{ "k", "<C-w>k " },
+					{ "l", "<C-w>l " },
+				},
+			})
+		end,
+	})
+	use({ "williamboman/mason.nvim", config = require("plugin_configs.mason").setup })
+	use({
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup({ automatic_installation = true })
+		end,
+	})
 end)

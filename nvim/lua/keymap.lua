@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 
 local keymap = require("my_plugins.keymap")
 
-
 -- utility
 local utils = require("my_plugins.utils")
 
@@ -79,5 +78,3 @@ keymap.map(
 		command = ":TroubleToggle<CR>",
 	})
 )
-
-return M
