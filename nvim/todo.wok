@@ -1,0 +1,14 @@
+Want:
+
+    a way to edit nvim config anywhere
+
+    tmux + nvim config
+
+    file tree
+
+    action system
+
+    support rust, typescript, lua environment
+        format on save
+    
+    git support
