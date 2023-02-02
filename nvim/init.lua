@@ -1,3 +1,4 @@
+require("new_keymap")
 require("lazy_config")
 -- require("plugins")
 -- require("lsp_setup")

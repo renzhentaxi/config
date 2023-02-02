@@ -12,21 +12,22 @@ local function on_attach(client, bufnr)
             end,
         })
     end
-
 end
 
 return {
     {
-        "neovim/nvim-lspconfig", 
+        "neovim/nvim-lspconfig",
         event = "BufReadPre",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp"
+            "hrsh7th/cmp-nvim-lsp",
+            "folke/neodev.nvim",
         },
 
-        config = function ()
-            require('lspconfig')['sumneko_lua'].setup{
+        config = function()
+            require("lspconfig")["sumneko_lua"].setup({
                 on_attach = on_attach,
-            }
-        end
-    }
+            })
+        end,
+    },
 }
+
