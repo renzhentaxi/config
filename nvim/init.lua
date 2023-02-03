@@ -1,6 +1,4 @@
 require("new_keymap")
 require("lazy_config")
--- require("plugins")
--- require("lsp_setup")
+require("commands")
 require("general_setup")
--- require("keymap")
