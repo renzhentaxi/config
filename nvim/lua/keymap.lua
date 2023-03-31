@@ -6,14 +6,14 @@ local keymap = require("my_plugins.keymap")
 local utils = require("my_plugins.utils")
 
 local function reload_my_plugins()
-	for key, _ in pairs(package.loaded) do
-		if vim.startswith(key, "my_plugins") then
-			utils.callIfExist(require(key), "teardown")
-			package.loaded[key] = nil
-			utils.callIfExist(require(key), "setup")
-			print("reloaded " .. key)
-		end
-	end
+    for key, _ in pairs(package.loaded) do
+        if vim.startswith(key, "my_plugins") then
+            utils.callIfExist(require(key), "teardown")
+            package.loaded[key] = nil
+            utils.callIfExist(require(key), "setup")
+            print("reloaded " .. key)
+        end
+    end
 end
 
 -- quickfix
@@ -27,10 +27,10 @@ keymap.map("n <leader>s", keymap.action({ name = "save", command = ":w<cr>" }))
 local cmd_escape_terminal = "<C-\\><C-n>"
 
 for _, key in ipairs({ "h", "j", "k", "l" }) do
-	local keybind = "<" .. "A" .. "-" .. key .. ">"
-	local action_cmd = "<C-w>" .. key
-	keymap.map("t " .. keybind, cmd_escape_terminal .. action_cmd)
-	keymap.map("n " .. keybind, action_cmd)
+    local keybind = "<" .. "A" .. "-" .. key .. ">"
+    local action_cmd = "<C-w>" .. key
+    keymap.map("t " .. keybind, cmd_escape_terminal .. action_cmd)
+    keymap.map("n " .. keybind, action_cmd)
 end
 
 -- fugitive
@@ -72,9 +72,9 @@ keymap.map("n <leader>f", telescope.actions.file_browser)
 -- trouble
 
 keymap.map(
-	"n <leader>ga",
-	keymap.action({
-		name = "trouble diagnostics",
-		command = ":TroubleToggle<CR>",
-	})
+    "n <leader>ga",
+    keymap.action({
+        name = "trouble diagnostics",
+        command = ":TroubleToggle<CR>",
+    })
 )

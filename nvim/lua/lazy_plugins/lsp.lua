@@ -14,6 +14,8 @@ local function on_attach(client, bufnr)
     end
 end
 
+
+
 return {
     {
         "neovim/nvim-lspconfig",
@@ -22,13 +24,13 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
         },
-
         config = function()
-            require("lspconfig")["sumneko_lua"].setup({
+            require("lspconfig")["lua_ls"].setup({
                 on_attach = on_attach,
             })
 
             require("lspconfig")["rust_analyzer"].setup({ on_attach = on_attach })
+            require("lspconfig")["tsserver"].setup({ on_attach = on_attach })
         end,
     },
 }
